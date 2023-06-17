@@ -101,6 +101,11 @@ body {
     padding: 10px;
 }
 
+.kategorie__content {
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .entry__title {
     display: inline;
     font-size: 18px;
@@ -158,3 +163,11 @@ body {
     text-decoration: underline;
 }
 
+.entry_part {
+    margin-top: 1em;
+}
+
+p {
+  margin-top: 0em ;
+  margin-bottom: 0em ;
+}
