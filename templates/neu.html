@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.1">
+    <title>Micha's Emotions-Tagebuch</title>
+    <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img class="navbar__logo" src="/static/placeholder.svg" alt="Micha's Emotionstagebuch" />Micha's Emotionstagebuch
+        </div>
+        <ul class="navbar__navigation">
+            <li class="navbar__navigation-item"><a href="{{ url_for('home') }}" class="navbar__link">Home</a></li>
+            <li class="navbar__navigation-item"><a href="#" class="navbar__link">Kalender</a></li>
+        </ul>
+    </header>
+    <main class="main">
+        <section>
+            <h1>Neuer Eintrag:</h1>
+            <form class="form" method="POST">
+                <p class="form__input">
+                    <label for="situation" class="form__label">Situation:</label>
+                    <textarea name="content_situation" id="situation" class="form__textarea" aria-label="Entry Situation"></textarea>
+                </p>
+
+                <p class="form__input">
+                    <label for="reaktion" class="form__label">Reaktion:</label>
+                    <textarea name="content_reaktion" id="reaktion" class="form__textarea" aria-label="Entry Reaktion"></textarea>
+                </p>
+
+                <p class="form__input">
+                    <label for="verhalten" class="form__label">Verhalten:</label>
+                    <textarea name="content_verhalten" id="verhalten" class="form__textarea" aria-label="Entry Verhalten"></textarea>
+                </p>
+                <button class="form__submit" type="submit">Eintragen</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
