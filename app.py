@@ -29,8 +29,9 @@ def create_app():
             )
             for entry in app.db.emotionen.find({})
         ]
+        sorted_entries = sorted(entries_with_date, key=lambda x: x[3], reverse=True)
 
-        return render_template("home.html", entries=entries_with_date)
+        return render_template("home.html", entries=sorted_entries)
 
     @app.route("/neu/", methods=["GET", "POST"])
     def neu():
