@@ -23,7 +23,7 @@ def create_app():
         if not session.get("authenticated"):
             return redirect(url_for("login"))
 
-        entries_with_date = [
+        sorted_entries = [
             (
                 entry["content_situation"],
                 entry["content_reaktion"],
@@ -33,7 +33,7 @@ def create_app():
             )
             for entry in app.db.emotionen.find({})
         ]
-        sorted_entries = sorted(entries_with_date, key=lambda x: x[3], reverse=True)
+        sorted_entries = sorted(sorted_entries, key=lambda x: x[3], reverse=True)
 
         return render_template("home.html", entries=sorted_entries)
 
@@ -58,7 +58,7 @@ def create_app():
                 session["authenticated"] = True
                 return render_template("home.html")
             else:
-                return render_template("login.html", message="Falsches Passwort")
+                return render_template("login.html", message="Falsches Passwort!")
 
         return render_template("login.html", message=None)
 
