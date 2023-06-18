@@ -1,6 +1,6 @@
 import datetime
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import gunicorn
@@ -11,13 +11,17 @@ load_dotenv()
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = os.getenv("SECRET_KEY")
     client = MongoClient(os.getenv("MONGODB_URI"))
     app.db = client.emotionstagebuch
+    password = os.getenv("PASSWORD")
 
     entries = []
 
     @app.route("/", methods=["GET", "POST"])
     def home():
+        if not session.get("authenticated"):
+            return redirect(url_for("login"))
 
         entries_with_date = [
             (
@@ -44,6 +48,19 @@ def create_app():
                                          "content_verhalten": entry_verhalten, "date": formatted_date})
 
         return render_template("neu.html")
+
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        if request.method == "POST":
+            password_attempt = request.form.get("password")
+
+            if password_attempt == password:
+                session["authenticated"] = True
+                return render_template("home.html")
+            else:
+                return render_template("login.html", message="Falsches Passwort")
+
+        return render_template("login.html", message=None)
 
     return app
 
