@@ -22,20 +22,29 @@ def create_app():
     def home():
         if not session.get("authenticated"):
             return redirect(url_for("login"))
+        else:
+            sorted_entries = [
+                (
+                    entry["content_situation"],
+                    entry["content_reaktion"],
+                    entry["content_verhalten"],
+                    datetime.datetime.strptime(entry["date"], "%d.%m.%Y, %H:%M") + datetime.timedelta(hours=2),
+                )
+                for entry in app.db.emotionen.find({})
+            ]
+            sorted_entries = sorted(sorted_entries, key=lambda x: x[3], reverse=True)
 
-        sorted_entries = [
-            (
-                entry["content_situation"],
-                entry["content_reaktion"],
-                entry["content_verhalten"],
-                entry["date"],
-                datetime.datetime.strptime(entry["date"], "%d.%m.%Y, %H:%M").strftime("%b, %d"),
-            )
-            for entry in app.db.emotionen.find({})
-        ]
-        sorted_entries = sorted(sorted_entries, key=lambda x: x[3], reverse=True)
+            formatted_entries = [
+                (
+                    entry[0],
+                    entry[1],
+                    entry[2],
+                    entry[3].strftime("%d. %b %Y, %H:%M"),
+                )
+                for entry in sorted_entries
+            ]
 
-        return render_template("home.html", entries=sorted_entries)
+            return render_template("home.html", entries=formatted_entries)
 
     @app.route("/neu/", methods=["GET", "POST"])
     def neu():
