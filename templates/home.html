@@ -16,7 +16,7 @@
         </div>
         <ul class="navbar__navigation">
             <li class="navbar__navigation-item"><a href="{{ url_for('neu') }}" class="navbar__link">Neuer Eintrag</a></li>
-            <li class="navbar__navigation-item"><a href="#" class="navbar__link">Kalender</a></li>
+            <li class="navbar__navigation-item"><a href="{{ url_for('logout') }}" class="navbar__link">Logout</a></li>
         </ul>
     </header>
     <main class="main">
@@ -25,7 +25,7 @@
             {% for entry in entries %}
             <article class="entry">
                 <div class="entry_part">
-                    <h2 class="entry__title">{{ entry[0] | truncate(30, true) }}</h2>
+                    <h2 class="entry__title">{{ entry[0] | truncate(20, true) }}</h2>
                     <time class="entry__date" datetime="{{ entry[1] }}">• {{ entry[3] }}</time>
                 </div>
                 <div class="entry_part">
@@ -48,7 +48,7 @@
         <div class="footer__content">
             <section class="left">
                 <a class="footer__item">Made by Michael Karnitzschky</a>
-                <a class="footer__item">Check out my other projects</a>
+                <a class="footer__item">Meine anderen Projekte</a>
             </section>
             <section class="right">
                 <div class="footer__column">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="footer__column">
                     <a class="footer__item">Über...</a>
-                    <a class="footer__item">Wie dies gemacht wurde</a>
+                    <a class="footer__item">Wie diese Seite gemacht wurde</a>
                 </div>
             </section>
         </div>

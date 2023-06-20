@@ -71,7 +71,12 @@ def create_app():
 
         return render_template("login.html", message=None)
 
+    @app.route("/logout", methods=["GET", "POST"])
+    def logout():
+        session["authenticated"] = False
+        if request.form == "POST":
+            return render_template("home.html")
+        return render_template("logout.html")
+
     return app
 
-# if __name__ == '__main__':
-#    app.run()
