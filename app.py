@@ -65,7 +65,7 @@ def create_app():
 
             if password_attempt == password:
                 session["authenticated"] = True
-                return render_template(url_for("home"))
+                return render_template("home.html")
             else:
                 return render_template("login.html", message="Falsches Passwort!")
 
