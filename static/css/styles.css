@@ -86,6 +86,7 @@ body {
     padding: 5px 30px;
     border-radius: 20px;
     color: #F1F6F9;
+    margin: 5px;
 }
 
 .form__submit:hover {
